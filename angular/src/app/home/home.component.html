@@ -1,0 +1,195 @@
+<div class="container mt-5">
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card bg-danger text-white shadow-sm text-center p-3 border-0">
+        <h6 class="text-uppercase opacity-75 small fw-bold">
+          <i class="fa fa-heartbeat me-2"></i>Kritik
+        </h6>
+        <h2 class="display-6 fw-bold">{{ getCount(1) }}</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-warning text-dark shadow-sm text-center p-3 border-0">
+        <h6 class="text-uppercase opacity-75 small fw-bold">
+          <i class="fa fa-exclamation-triangle me-2"></i>Orta Derece
+        </h6>
+        <h2 class="display-6 fw-bold">{{ getCount(2) }}</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-success text-white shadow-sm text-center p-3 border-0">
+        <h6 class="text-uppercase opacity-75 small fw-bold">
+          <i class="fa fa-check-circle me-2"></i>Stabil
+        </h6>
+        <h2 class="display-6 fw-bold">{{ getCount(3) }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <div class="input-group shadow-sm">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="fa fa-search text-muted"></i>
+        </span>
+        <input type="text" 
+               class="form-control border-start-0 ps-0" 
+               placeholder="Hasta adı veya soyadı ile hızlı ara..." 
+               (input)="onSearch($event)">
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow border-0">
+    <div class="card-header bg-primary text-white p-3 border-0">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">
+          <i class="fa fa-hospital-user me-2"></i> SmartClinic Hasta Takip Paneli
+        </h4>
+        <div class="d-flex align-items-center">
+          <span class="badge bg-light text-primary me-3 p-2">
+            Kayıtlı Hasta: {{ patients.length }}
+          </span>
+          <button class="btn btn-sm btn-light text-primary fw-bold shadow-sm px-3" (click)="createPatient()">
+            <i class="fa fa-plus me-1"></i> Yeni Hasta Kaydı
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+          <thead class="table-light">
+            <tr>
+              <th class="ps-4 py-3">Hasta Bilgileri</th>
+              <th>Şikayet</th>
+              <th class="text-center">Durum</th>
+              <th class="text-end pe-4">İşlemler</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of filteredPatients">
+              <td class="ps-4">
+                <div class="fw-bold text-dark">
+                  {{ patient.name }} {{ patient.surname }}
+                </div>
+                <small class="text-muted">
+                  <i class="fa fa-clock me-1"></i>
+                  {{ (patient.admissionDate || patient.AdmissionDate) | date:'HH:mm' }}
+                </small>
+              </td>
+              <td>{{ patient.complaint }}</td>
+              <td class="text-center">
+                <span class="badge rounded-pill px-3 py-2 text-white" 
+                      [ngClass]="getStatusBadge(patient.status)"
+                      style="min-width: 100px; font-weight: 600;">
+                  {{ patient.status === 1 ? 'ACİL' : (patient.status === 2 ? 'ORTA' : 'STABİL') }}
+                </span>
+              </td>
+              <td class="text-end pe-4">
+                <div class="btn-group shadow-sm">
+                  <button class="btn btn-sm btn-light border" (click)="openDetail(patient)" title="Hasta Detayı">
+                    <i class="fa fa-eye text-primary"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deletePatient(patient.id)" title="Taburcu Et">
+                    <i class="fa fa-sign-out-alt"></i> Taburcu Et
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr *ngIf="filteredPatients.length === 0">
+              <td colspan="4" class="text-center py-5 text-muted">
+                <i class="fa fa-search fa-2x mb-2 opacity-25"></i>
+                <p>Eşleşen hasta kaydı bulunamadı.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<abp-modal [(visible)]="isModalOpen">
+  <ng-template #abpHeader>
+    <h3 class="mb-0"><i class="fa fa-user-plus me-2"></i> Yeni Hasta Tanımla</h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="patientForm" (ngSubmit)="save()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label fw-bold small">Hasta Adı</label>
+          <input type="text" class="form-control shadow-sm" formControlName="name" placeholder="Ad" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label fw-bold small">Hasta Soyadı</label>
+          <input type="text" class="form-control shadow-sm" formControlName="surname" placeholder="Soyad" />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-bold small">Şikayeti / Belirtiler</label>
+        <textarea class="form-control shadow-sm" formControlName="complaint" rows="3" placeholder="Şikayeti detaylandırın..."></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-bold small">Aciliyet (Triyaj) Durumu</label>
+        <select class="form-select shadow-sm" formControlName="status">
+          <option [ngValue]="1">Acil (Kırmızı Kod)</option>
+          <option [ngValue]="2">Orta (Sarı Kod)</option>
+          <option [ngValue]="3">Stabil (Yeşil Kod)</option>
+        </select>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-outline-secondary px-4" abpClose>Kapat</button>
+    <button type="button" class="btn btn-primary px-4" (click)="save()" [disabled]="patientForm.invalid"> 
+      <i class="fa fa-save me-1"></i> Kaydet ve Listele
+    </button>
+  </ng-template>
+</abp-modal>
+
+<abp-modal [(visible)]="isDetailModalOpen">
+  <ng-template #abpHeader>
+    <h3 class="mb-0 text-primary">
+      <i class="fa fa-id-card me-2"></i> Hasta Detay Bilgileri
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <div class="row" *ngIf="selectedPatient">
+      <div class="col-md-12">
+        <div class="d-flex align-items-center mb-4 border-bottom pb-3">
+          <div class="bg-light rounded-circle p-3 me-3">
+            <i class="fa fa-user fa-2x text-secondary"></i>
+          </div>
+          <div>
+            <h4 class="mb-0 fw-bold">{{ selectedPatient.name }} {{ selectedPatient.surname }}</h4>
+            <span class="badge rounded-pill px-3 py-2 mt-1" [ngClass]="getStatusBadge(selectedPatient.status)">
+              {{ selectedPatient.status === 1 ? 'KRİTİK' : (selectedPatient.status === 2 ? 'ORTA' : 'STABİL') }}
+            </span>
+          </div>
+        </div>
+
+        <div class="p-3 bg-light rounded border-start border-primary border-4 mb-3">
+          <label class="text-muted small fw-bold d-block text-uppercase">Geliş Şikayeti</label>
+          <p class="mb-0 mt-1">"{{ selectedPatient.complaint }}"</p>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-6">
+            <label class="text-muted small d-block">Giriş Kaydı</label>
+            <p class="fw-bold"><i class="fa fa-clock me-1 text-primary"></i> {{ (selectedPatient.admissionDate || selectedPatient.AdmissionDate) | date:'HH:mm' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type="button" class="btn btn-secondary px-4" (click)="isDetailModalOpen = false">Kapat</button>
+  </ng-template>
+</abp-modal>

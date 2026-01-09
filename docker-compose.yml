@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # 1. VERİTABANI (PostgreSQL)
+  smartclinic-db:
+    image: postgres:15-alpine
+    container_name: SmartClinic_DB
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=Password123
+      - POSTGRES_DB=SmartClinicDb
+    ports:
+      - "5432:5432"
+
+  # 2. CACHE SİSTEMİ (Redis)
+  smartclinic-redis:
+    image: redis:alpine
+    container_name: SmartClinic_Redis
+    ports:
+      - "6379:6379"
+
+  # 3. BACKEND (HttpApi.Host)
+  smartclinic-api:
+    build:
+      context: .
+      dockerfile: src/SmartClinic.HttpApi.Host/Dockerfile
+    container_name: SmartClinic_API
+    depends_on:
+      - smartclinic-db
+      - smartclinic-redis
+    environment:
+      - ConnectionStrings__Default=Host=smartclinic-db;Port=5432;Database=SmartClinicDb;Username=admin;Password=Password123
+      - Redis__Configuration=smartclinic-redis:6379
+      - ASPNETCORE_URLS=http://+:80
+      - App__SelfUrl=http://localhost:44305
+      - AuthServer__Authority=http://localhost:44305
+      - AuthServer__RequireHttpsMetadata=false
+    ports:
+      - "44305:80"
+
+  # 4. FRONTEND (Angular)
+  smartclinic-angular:
+    build:
+      context: ./angular
+      dockerfile: Dockerfile
+    container_name: SmartClinic_Angular
+    depends_on:
+      - smartclinic-api
+    ports:
+      - "4200:80"

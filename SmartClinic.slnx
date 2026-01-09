@@ -1,0 +1,23 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/SmartClinic.Domain/SmartClinic.Domain.csproj" />
+        <Project Path="src/SmartClinic.Application/SmartClinic.Application.csproj" />
+        <Project Path="src/SmartClinic.EntityFrameworkCore/SmartClinic.EntityFrameworkCore.csproj" />
+        <Project Path="src/SmartClinic.Domain.Shared/SmartClinic.Domain.Shared.csproj" />
+        <Project Path="src/SmartClinic.Application.Contracts/SmartClinic.Application.Contracts.csproj" />
+        <Project Path="src/SmartClinic.HttpApi/SmartClinic.HttpApi.csproj" />
+        <Project Path="src/SmartClinic.HttpApi.Client/SmartClinic.HttpApi.Client.csproj" />
+        <Project Path="src/SmartClinic.DbMigrator/SmartClinic.DbMigrator.csproj" />
+        <Project Path="src/SmartClinic.HttpApi.Host/SmartClinic.HttpApi.Host.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/SmartClinic.Application.Tests/SmartClinic.Application.Tests.csproj" />
+        <Project Path="test/SmartClinic.EntityFrameworkCore.Tests/SmartClinic.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/SmartClinic.TestBase/SmartClinic.TestBase.csproj" />
+        <Project Path="test/SmartClinic.Domain.Tests/SmartClinic.Domain.Tests.csproj" />
+        <Project Path="test/SmartClinic.HttpApi.Client.ConsoleTestApp/SmartClinic.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

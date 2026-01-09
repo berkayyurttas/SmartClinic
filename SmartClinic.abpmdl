@@ -1,0 +1,109 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.BasicTheme": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.0.1",
+      "isInstalled": true,
+      "creationTime": "01/09/2026 07:07:47 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "SmartClinic.Application": {
+      "path": "src/SmartClinic.Application/SmartClinic.Application.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.Application.Tests": {
+      "path": "test/SmartClinic.Application.Tests/SmartClinic.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "SmartClinic.Domain.Shared": {
+      "path": "src/SmartClinic.Domain.Shared/SmartClinic.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.Application.Contracts": {
+      "path": "src/SmartClinic.Application.Contracts/SmartClinic.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.HttpApi": {
+      "path": "src/SmartClinic.HttpApi/SmartClinic.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.HttpApi.Client": {
+      "path": "src/SmartClinic.HttpApi.Client/SmartClinic.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.EntityFrameworkCore.Tests": {
+      "path": "test/SmartClinic.EntityFrameworkCore.Tests/SmartClinic.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "SmartClinic.EntityFrameworkCore": {
+      "path": "src/SmartClinic.EntityFrameworkCore/SmartClinic.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.TestBase": {
+      "path": "test/SmartClinic.TestBase/SmartClinic.TestBase.abppkg",
+      "folder": "test"
+    },
+    "SmartClinic.Domain.Tests": {
+      "path": "test/SmartClinic.Domain.Tests/SmartClinic.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "SmartClinic.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/SmartClinic.HttpApi.Client.ConsoleTestApp/SmartClinic.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "SmartClinic.DbMigrator": {
+      "path": "src/SmartClinic.DbMigrator/SmartClinic.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.HttpApi.Host": {
+      "path": "src/SmartClinic.HttpApi.Host/SmartClinic.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "SmartClinic.Domain": {
+      "path": "src/SmartClinic.Domain/SmartClinic.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}
