@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +32,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Identity;
-using Volo.Abp.OpenIddict;
+using Volo.Abp.OpenIddict; // KRİTİK: AddAbpOpenIddictValidation için gerekli
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Security.Claims;
@@ -131,10 +130,8 @@ public class SmartClinicHttpApiHostModule : AbpModule
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
     {
-        // HATA VEREN SATIR DÜZELTİLDİ:
-        // .NET 10 ve güncel ABP sürümleri için en garanti yöntem bud4ur.
-        context.Services.AddAuthentication()
-            .AddAbpOpenIddictValidation();
+        // HATA VEREN KISIM: Direkt servis koleksiyonu üzerinden çağrılarak hata önlendi
+        context.Services.AddAbpOpenIddictValidation();
 
         context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
         {
