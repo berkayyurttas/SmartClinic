@@ -1,30 +1,29 @@
-# 🏥 SmartClinic - Akıllı Hasta Takip & Triyaj Sistemi
+# 🏥 SmartClinic: Akıllı Hasta Takip & Triyaj Yönetim Sistemi
 
-SmartClinic, modern sağlık kuruluşları için geliştirilmiş, hasta kayıt ve triyaj (önceliklendirme) süreçlerini dijitalleştiren web tabanlı bir yönetim sistemidir. 
+SmartClinic, sağlık kuruluşlarında hasta kayıt süreçlerini modernize eden ve acil servislerdeki kritik **triyaj (önceliklendirme)** operasyonlarını yöneten kurumsal seviyede bir ekosistemdir.
 
-## 🚀 Proje Amacı
-Bu proje; acil servis ve kliniklerdeki hasta yoğunluğunu yönetmek, hastaların aciliyet durumlarını (Kırmızı, Sarı, Yeşil) görselleştirerek sağlık personelinin iş yükünü optimize etmek amacıyla geliştirilmiştir.
+## 🌟 Proje Vizyonu
+Bu sistem, hastaların şikayet ve hayati bulgularına göre otomatik olarak **Kırmızı (Kritik), Sarı (Acil) ve Yeşil (Stabil)** kodlarıyla sınıflandırılmasını sağlar. Amacımız, sağlık personelinin üzerindeki karar yükünü azaltmak ve müdahale sürelerini optimize ederek hayat kurtarmaktır.
 
-## 🛠️ Teknik Altyapı
-Proje, kurumsal standartlarda modern bir teknoloji yığını (stack) ile inşa edilmiştir:
+---
 
-* **Backend:** .NET 10 & ABP Framework (Domain Driven Design - DDD)
-* **Frontend:** Angular (Modern UI/UX Components)
-* **Veritabanı:** PostgreSQL
-* **Cache:** Redis
-* **Konteynerleştirme:** Docker & Docker-Compose
-* **CI/CD:** GitHub Actions (Otomatik Build ve İmaj Dağıtımı)
+## 🛠️ Teknik Mimari ve Teknoloji Yığını
+Proje, **Domain Driven Design (DDD)** prensipleriyle tasarlanmış olup **ABP Framework** altyapısını kullanmaktadır:
 
-## 📦 Kurulum ve Çalıştırma
+* **Backend:** .NET 10 (C#) & Web API
+* **Frontend:** Angular (SPA - Single Page Application)
+* **Veritabanı:** PostgreSQL (PostgreSQL 16+)
+* **Caching:** Redis (Performans ve oturum yönetimi için)
+* **Konteynerleştirme:** Docker & Docker-Compose (Tüm servisler izole edilmiştir)
+* **CI/CD:** GitHub Actions (Otomatik Derleme ve Deployment Hattı)
 
-Sistemi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
+---
 
-### 1. Gereksinimler
-* Docker Desktop
-* .NET 10 SDK
-* Node.js & NPM
+## 🚀 Hızlı Kurulum Rehberi (Docker)
 
-### 2. Docker ile Hızlı Başlat
-Proje dizininde terminali açın ve tüm konteynerleri ayağa kaldırın:
+Proje, hiçbir kurulum zahmetine girmeden Docker üzerinden çalışacak şekilde optimize edilmiştir:
+
+### 1. Servisleri Başlatma
+Terminalde proje ana dizinine gidin ve konteynerleri inşa ederek başlatın:
 ```powershell
 docker-compose up -d --build
