@@ -18,6 +18,11 @@ Proje, **Domain Driven Design (DDD)** prensipleriyle tasarlanmış olup **ABP Fr
 * **CI/CD:** GitHub Actions (Otomatik Derleme ve Deployment Hattı)
 
 ---
+Dockerize Edilmiş Mimari: Tüm projeyi mikroservis mantığına yakın bir şekilde Docker konteynerleri içine aldık. API, Veritabanı ve Redis birbirlerinden izole ama uyumlu çalışıyor.
+
+CI/CD Süreçleri: GitHub Actions kullanarak sürekli entegrasyon hattı kurduk. Kodda yapılan her değişiklik otomatik olarak build ediliyor.
+
+OAuth2 ve Güvenlik: OpenIddict kullanarak, kimlik doğrulama süreçlerini dünya standartlarında (Bearer Token) güvenli hale getirdik.
 
 ## 🚀 Hızlı Kurulum Rehberi (Docker)
 
