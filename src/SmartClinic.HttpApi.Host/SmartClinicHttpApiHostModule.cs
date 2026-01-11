@@ -2,15 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 using OpenIddict.Validation.AspNetCore;
 using OpenIddict.Server.AspNetCore;
 using SmartClinic.EntityFrameworkCore;
@@ -32,13 +30,13 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
-using Microsoft.AspNetCore.Hosting;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Identity;
 using Volo.Abp.OpenIddict;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Security.Claims;
+using Volo.Abp.Timing; // SAAT AYARI İÇİN GEREKLİ
 
 namespace SmartClinic;
 
@@ -80,8 +78,6 @@ public class SmartClinicHttpApiHostModule : AbpModule
 
             PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
             {
-                // KESİN ÇÖZÜM: Docker ortamında şifre/dosya hatalarını engellemek için
-                // her durumda geliştirme sertifikalarını kullanmaya zorluyoruz.
                 serverBuilder.AddDevelopmentEncryptionCertificate()
                              .AddDevelopmentSigningCertificate();
 
@@ -94,6 +90,12 @@ public class SmartClinicHttpApiHostModule : AbpModule
     {
         var configuration = context.Services.GetConfiguration();
         var hostingEnvironment = context.Services.GetHostingEnvironment();
+
+        // --- SAAT DİLİMİ AYARI (TÜRKİYE SAATİ İÇİN) ---
+        Configure<AbpClockOptions>(options =>
+        {
+            options.Kind = DateTimeKind.Local; 
+        });
 
         if (!configuration.GetValue<bool>("App:DisablePII"))
         {

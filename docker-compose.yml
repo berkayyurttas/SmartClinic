@@ -9,6 +9,7 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=Password123
       - POSTGRES_DB=SmartClinicDb
+      - TZ=Europe/Istanbul  # VERİTABANI SAAT DİLİMİ
     ports:
       - "5432:5432"
 
@@ -16,6 +17,8 @@ services:
   smartclinic-redis:
     image: redis:alpine
     container_name: SmartClinic_Redis
+    environment:
+      - TZ=Europe/Istanbul  # REDIS SAAT DİLİMİ
     ports:
       - "6379:6379"
 
@@ -35,6 +38,7 @@ services:
       - App__SelfUrl=http://localhost:44305
       - AuthServer__Authority=http://localhost:44305
       - AuthServer__RequireHttpsMetadata=false
+      - TZ=Europe/Istanbul  # API SAAT DİLİMİ
     ports:
       - "44305:80"
 
@@ -46,5 +50,7 @@ services:
     container_name: SmartClinic_Angular
     depends_on:
       - smartclinic-api
+    environment:
+      - TZ=Europe/Istanbul  # ANGULAR SAAT DİLİMİ
     ports:
       - "4200:80"
