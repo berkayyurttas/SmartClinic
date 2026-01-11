@@ -1,44 +1,30 @@
-# 🏥 SmartClinic – Akıllı Hasta Yönetim Sistemi
+# 🏥 SmartClinic - Akıllı Hasta Takip & Triyaj Sistemi
 
-Bu proje, modern kliniklerin hasta takip süreçlerini dijitalleştirmek, kritik vaka yönetimini kolaylaştırmak ve anlık istatistik takibi yapmak amacıyla geliştirilmiş **full-stack** bir yönetim panelidir. 
+SmartClinic, modern sağlık kuruluşları için geliştirilmiş, hasta kayıt ve triyaj (önceliklendirme) süreçlerini dijitalleştiren web tabanlı bir yönetim sistemidir. 
 
-Proje, kurumsal standartlarda **ABP Framework** altyapısı kullanılarak, mikroservis mantığına yakın bir konteyner yapısıyla (Docker) inşa edilmiştir.
+## 🚀 Proje Amacı
+Bu proje; acil servis ve kliniklerdeki hasta yoğunluğunu yönetmek, hastaların aciliyet durumlarını (Kırmızı, Sarı, Yeşil) görselleştirerek sağlık personelinin iş yükünü optimize etmek amacıyla geliştirilmiştir.
 
----
+## 🛠️ Teknik Altyapı
+Proje, kurumsal standartlarda modern bir teknoloji yığını (stack) ile inşa edilmiştir:
 
-## 🚀 Öne Çıkan Özellikler
+* **Backend:** .NET 10 & ABP Framework (Domain Driven Design - DDD)
+* **Frontend:** Angular (Modern UI/UX Components)
+* **Veritabanı:** PostgreSQL
+* **Cache:** Redis
+* **Konteynerleştirme:** Docker & Docker-Compose
+* **CI/CD:** GitHub Actions (Otomatik Build ve İmaj Dağıtımı)
 
-* **📈 Dinamik Dashboard:** Kritik, orta derece ve stabil hasta sayılarını anlık olarak gösteren istatistik paneli.
-* **👥 Hasta Yönetimi:** Hasta kayıt, takip ve taburcu işlemlerinin yönetildiği kapsamlı modül.
-* **🔐 Kimlik ve Yetkilendirme:** ABP Identity ve IdentityServer entegrasyonu ile güvenli giriş ve rol yönetimi.
-* **🛡️ Sağlık İzleme:** API ve veritabanı durumunu takip eden entegre Health Check sistemi.
-* **⚡ Performans:** Veri önbellekleme (Caching) için Redis entegrasyonu.
+## 📦 Kurulum ve Çalıştırma
 
----
+Sistemi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
 
-## 🛠️ Kullanılan Teknolojiler
+### 1. Gereksinimler
+* Docker Desktop
+* .NET 10 SDK
+* Node.js & NPM
 
-### Backend
-* **.NET 8 (C#)** – Güçlü ve modern API altyapısı.
-* **ABP Framework** – Modüler mimari ve Domain Driven Design (DDD) standartları.
-* **PostgreSQL** – İlişkisel veritabanı yönetimi.
-* **Entity Framework Core** – Veritabanı yönetim katmanı (ORM).
-
-### Frontend
-* **Angular** – Dinamik ve hızlı kullanıcı arayüzü.
-* **Bootstrap** – Modern ve responsive (mobil uyumlu) tasarım.
-
-### Altyapı
-* **Docker & Docker Compose** – Konteyner tabanlı dağıtım ve ortam bağımsız çalışma.
-* **Redis** – Hızlı erişim için yüksek performanslı önbellek sistemi.
-
----
-
-## ⚙️ Kurulum ve Çalıştırma
-
-Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları takip edin:
-
-### 1. Projeyi Klonlayın
+### 2. Docker ile Hızlı Başlat
+Proje dizininde terminali açın ve tüm konteynerleri ayağa kaldırın:
 ```powershell
-git clone [https://github.com/berkayyurttas/SmartClinic.git](https://github.com/berkayyurttas/SmartClinic.git)
-cd SmartClinic
+docker-compose up -d --build
