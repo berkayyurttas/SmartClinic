@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,7 +37,7 @@ using Volo.Abp.OpenIddict;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Security.Claims;
-using Volo.Abp.Timing; // SAAT AYARI İÇİN GEREKLİ
+using Volo.Abp.Timing;
 
 namespace SmartClinic;
 
@@ -91,7 +92,7 @@ public class SmartClinicHttpApiHostModule : AbpModule
         var configuration = context.Services.GetConfiguration();
         var hostingEnvironment = context.Services.GetHostingEnvironment();
 
-        // --- SAAT DİLİMİ AYARI (TÜRKİYE SAATİ İÇİN) ---
+        // --- SAAT DİLİMİ AYARI ---
         Configure<AbpClockOptions>(options =>
         {
             options.Kind = DateTimeKind.Local; 
@@ -130,7 +131,11 @@ public class SmartClinicHttpApiHostModule : AbpModule
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
     {
-        context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+        // HATA VEREN SATIR DÜZELTİLDİ:
+        // .NET 10 ve güncel ABP sürümleri için en garanti yöntem bud4ur.
+        context.Services.AddAuthentication()
+            .AddAbpOpenIddictValidation();
+
         context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
         {
             options.IsDynamicClaimsEnabled = true;
