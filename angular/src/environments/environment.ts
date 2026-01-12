@@ -1,15 +1,14 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'http://localhost:4200/';
 
 const oAuthConfig = {
-  
-  issuer: 'http://localhost:44305/', 
-  redirectUri: baseUrl,
+  issuer: 'http://localhost:44305', // SONUNDAKİ / işaretini SİLDİK
+  redirectUri: 'http://localhost:4200/', // SONUNA / EKLEDİK (Garanti olsun)
   clientId: 'SmartClinic_App',
   responseType: 'code',
   scope: 'offline_access SmartClinic',
-  requireHttps: false, // Docker içinde SSL sertifikasıyla uğraşmamak için false yapıyoruz
+  requireHttps: false,
 };
 
 export const environment = {

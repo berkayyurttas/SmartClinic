@@ -1,10 +1,10 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'http://localhost:4200/';
 
 const oAuthConfig = {
   // DÜZELTME: https -> http ve port 44326 -> 44305
-  issuer: 'http://localhost:44305/',
+  issuer: 'http://localhost:44305',
   redirectUri: baseUrl,
   clientId: 'SmartClinic_App',
   // Docker ve yerel test için Production modunda bile bunu false yapmalıyız
